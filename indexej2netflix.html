@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Wireframe - Interfaz Estilo Streaming</title>
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: sans-serif;
+        }
+
+        body {
+            background-color: #141414;
+            color: #ffffff;
+            position: relative;
+        }
+
+        /* --- MINIATURA FLOTANTE PARA VOLVER (Esquina Superior Izquierda) --- */
+        .miniatura-volver-netflix {
+            position: fixed;
+            top: 20px;
+            left: 25px;
+            width: 50px;
+            height: 50px;
+            object-fit: cover;
+            border-radius: 4px;
+            border: 2px solid #333;
+            cursor: pointer;
+            z-index: 1000;
+            transition: transform 0.2s ease, border-color 0.2s ease;
+        }
+
+        .miniatura-volver-netflix:hover {
+            transform: scale(1.08);
+            border-color: #d4af37;
+        }
+
+        /* --- NAVBAR --- */
+        .navbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px 30px;
+            background-color: #000000;
+            border-bottom: 1px solid #333;
+        }
+
+        .nav-left, .nav-right {
+            display: flex;
+            gap: 20px;
+            align-items: center;
+        }
+
+        .logo {
+            font-weight: bold;
+            color: #E50914;
+            font-size: 1.2rem;
+        }
+
+        .nav-links {
+            list-style: none;
+            display: flex;
+            gap: 15px;
+            font-size: 0.9rem;
+            color: #b3b3b3;
+        }
+
+        /* --- HERO SECTION --- */
+        .hero-section {
+            position: relative;
+            height: 60vh;
+            background-color: #2b2b2b; /* Simula el fondo sin imagen */
+            display: flex;
+            align-items: flex-end;
+            padding: 40px;
+            margin: 20px;
+            border-radius: 8px;
+        }
+
+        .hero-content {
+            max-width: 500px;
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+
+        .hero-title {
+            font-size: 2.5rem;
+            font-weight: bold;
+        }
+
+        .hero-description {
+            font-size: 0.95rem;
+            color: #d1d1d1;
+            line-height: 1.4;
+        }
+
+        .hero-buttons {
+            display: flex;
+            gap: 10px;
+        }
+
+        .btn {
+            padding: 10px 20px;
+            border: none;
+            border-radius: 4px;
+            font-weight: bold;
+            cursor: pointer;
+        }
+
+        .btn-primary {
+            background-color: #fff;
+            color: #000;
+        }
+
+        .btn-secondary {
+            background-color: rgba(109, 109, 110, 0.7);
+            color: #fff;
+        }
+
+        /* --- SECCIÓN CARRUSEL (MI LISTA) --- */
+        .carousel-section {
+            padding: 0 20px 40px 20px;
+        }
+
+        .section-title {
+            font-size: 1.2rem;
+            margin-bottom: 15px;
+        }
+
+        .carousel-track {
+            display: flex;
+            gap: 15px;
+            overflow-x: auto;
+            padding-bottom: 10px;
+        }
+
+        .card-placeholder {
+            min-width: 200px;
+            height: 120px;
+            background-color: #262626; /* Contenedor wireframe sin imagen */
+            border: 1px dashed #444;
+            border-radius: 4px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            color: #666;
+            font-size: 0.85rem;
+            flex-shrink: 0;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Miniatura flotante superior izquierda para volver a la pantalla de análisis en cascada de Netflix -->
+    <a href="index.html#netflix">
+        <img src="imagen/repos.png" alt="Volver al Análisis" class="miniatura-volver-netflix" title="Volver al Análisis de Netflix">
+    </a>
+
+    <header class="navbar">
+        <div class="nav-left">
+            <div class="logo">LOGO</div>
+            <ul class="nav-links">
+                <li>Inicio</li>
+                <li>Series</li>
+                <li>Películas</li>
+            </ul>
+        </div>
+        <div class="nav-right">
+            <span>🔍</span>
+            <span>🔔</span>
+            <span>👤</span>
+        </div>
+    </header>
+
+    <section class="hero-section">
+        <div class="hero-content">
+            <div class="hero-title">Título Principal</div>
+            <p class="hero-description">Sinopsis corta explicativa del contenido destacado que ocupa la zona central de la pantalla con elementos superpuestos.</p>
+            <div class="hero-buttons">
+                <button class="btn btn-primary">Reproducir</button>
+                <button class="btn btn-secondary">Más info</button>
+            </div>
+        </div>
+    </section>
+
+    <section class="carousel-section">
+        <h2 class="section-title">Mi lista</h2>
+        <div class="carousel-track">
+            <div class="card-placeholder">Card 1</div>
+            <div class="card-placeholder">Card 2</div>
+            <div class="card-placeholder">Card 3</div>
+            <div class="card-placeholder">Card 4</div>
+            <div class="card-placeholder">Card 5</div>
+        </div>
+    </section>
+
+</body>
+</html>

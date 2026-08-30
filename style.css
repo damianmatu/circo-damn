@@ -1,0 +1,662 @@
+/* ==========================================
+   CONFIGURACIÓN GENERAL
+========================================== */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body, html {
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    background-color: #000000;
+    font-family: "Montserrat", Arial, sans-serif;
+    perspective: 1000px; 
+}
+
+/* ==========================================
+   ESTILOS DE LA SECCIÓN 1 (PORTADA / CIRCO)
+========================================== */
+.pantalla-inicio {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 100vw;
+    height: 100vh;
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 10;
+    background-color: #000;
+    opacity: 1;
+    transition: opacity 1s ease;
+}
+
+.contenedor-absorcion {
+    position: relative;
+    width: 450px;
+    height: 450px;
+    overflow: hidden;
+    border-radius: 12px;
+    box-shadow: 0 0 35px rgba(0, 0, 0, 0.9), inset 0 0 25px rgba(0, 0, 0, 0.8);
+}
+
+.imagen-circo {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+}
+
+.capa-luz-vela {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: radial-gradient(circle, rgba(255,200,100,0.05) 0%, rgba(0,0,0,0.6) 80%);
+    pointer-events: none;
+    animation: parpadeoVela 4s infinite ease-in-out;
+}
+
+@keyframes parpadeoVela {
+    0%, 100% { opacity: 0.3; }
+    20% { opacity: 0.7; }
+    35% { opacity: 0.4; }
+    50% { opacity: 0.85; }
+    70% { opacity: 0.2; }
+    85% { opacity: 0.6; }
+}
+
+.btn-entrar {
+    background: none;
+    border: none;
+    color: #888;
+    font-size: 13px;
+    font-family: Arial, sans-serif;
+    letter-spacing: 2px;
+    margin-top: 20px;
+    cursor: pointer;
+    animation: parpadeoVela 2s infinite;
+    transition: color 0.3s ease;
+}
+
+.btn-entrar:hover {
+    color: #fff;
+}
+
+.pantalla-inicio.desvanecer {
+    opacity: 0;
+    pointer-events: none;
+}
+
+
+/* ==========================================
+   ESTILOS COMUNES DE LAS PANTALLAS (CARTA)
+========================================== */
+.pantalla-portafolio {
+    display: none; 
+    width: 100vw;
+    height: 100vh;
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 5;
+    background-color: #000;
+    justify-content: center;
+    align-items: center;
+}
+
+/* EFECTO DE ESTÁTICA */
+.efecto-estatica {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    z-index: 10;
+    opacity: 0.12;
+    background: url('data:image/svg+xml;utf8,<svg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg"><filter id="noiseFilter"><feTurbulence type="fractalNoise" baseFrequency="0.8" numOctaves="3" stitchTiles="stitch"/></filter><rect width="100%25" height="100%25" filter="url(%23noiseFilter)"/></svg>');
+    animation: estaticaRuido 1.2s infinite steps(4);
+}
+
+@keyframes estaticaRuido {
+    0% { transform: translate(0, 0); }
+    25% { transform: translate(-4%, -2%); }
+    50% { transform: translate(3%, 4%); }
+    75% { transform: translate(-2%, 3%); }
+    100% { transform: translate(0, 0); }
+}
+
+/* CONTENEDOR DE LA TARJETA */
+.contenedor-tarjeta {
+    position: relative;
+    width: 450px;
+    height: 650px;
+    overflow: visible;
+    border-radius: 12px;
+    box-shadow: 0 0 40px rgba(0, 0, 0, 0.95), inset 0 0 30px rgba(0, 0, 0, 0.7);
+    background-color: #1a110a; 
+    transition: transform 0.8s cubic-bezier(0.4, 0.2, 0.2, 1);
+    transform-style: preserve-3d;
+}
+
+/* ANIMACIÓN DE GIRO DE CARTA */
+.contenedor-tarjeta.girar-carta {
+    transform: rotateY(90deg) scale(0.9);
+    opacity: 0;
+}
+
+.imagen-fondo {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+    border-radius: 12px;
+}
+
+.menu-cartel {
+    position: absolute;
+    top: 58%;
+    left: 20%;
+    width: 60%;
+    height: 35%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    align-items: center;
+    z-index: 5;
+}
+
+.opcion-menu {
+    color: #2b1d0c;
+    text-decoration: none;
+    font-size: 19px;
+    font-family: 'MedievalSharp', cursive, serif;
+    letter-spacing: 1px;
+    transition: all 0.3s ease;
+    background: none;
+    padding: 0;
+    text-align: center;
+    display: inline-block;
+    cursor: pointer;
+}
+
+.opcion-menu::before {
+    content: "♦ ";
+    color: #7b1113;
+    font-size: 0.85em;
+    margin-right: 4px;
+    transition: color 0.3s ease;
+}
+
+.opcion-menu::after {
+    content: " ♦";
+    color: #7b1113;
+    font-size: 0.85em;
+    margin-left: 4px;
+    transition: color 0.3s ease;
+}
+
+.opcion-menu:hover {
+    color: #7b1113;
+    transform: scale(1.06);
+    text-shadow: 0 0 4px rgba(123, 17, 19, 0.3);
+}
+
+.opcion-menu:hover::before,
+.opcion-menu:hover::after {
+    color: #d4af37;
+}
+
+/* ESTILOS DE LA MINIATURA 1 (VOLVER AL MENÚ) */
+.miniatura-volver {
+    position: absolute;
+    top: 15px;
+    right: -32px;
+    width: 85px;
+    height: 115px;
+    object-fit: cover;
+    border-radius: 6px;
+    border: 2px solid #d4af37;
+    box-shadow: 0 5px 20px rgba(0, 0, 0, 0.95);
+    cursor: pointer;
+    z-index: 30;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.miniatura-volver:hover {
+    transform: scale(1.12) rotate(4deg) translateX(2px);
+    border-color: #ffffff;
+    box-shadow: 0 0 25px rgba(212, 175, 55, 0.8);
+}
+
+/* ESTILOS DE LA MINIATURA 2 (JUEGOS PENDIENTES) */
+.miniatura-segunda {
+    position: absolute;
+    top: 140px;
+    right: -32px;
+    width: 85px;
+    height: 115px;
+    background-color: #3b302a;
+    border-radius: 6px;
+    border: 2px solid #5a3d28;
+    box-shadow: 0 5px 20px rgba(0, 0, 0, 0.95);
+    cursor: pointer;
+    z-index: 30;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.miniatura-segunda:hover {
+    background-color: #52433b;
+    transform: scale(1.12) rotate(-4deg) translateX(2px);
+    border-color: #d4af37;
+    box-shadow: 0 0 25px rgba(212, 175, 55, 0.6);
+}
+
+/* ==========================================
+   ESTILOS DE LA PANTALLA 4 (CASCADA DE TEXTO)
+========================================== */
+.cascada-texto {
+    position: absolute;
+    top: 18%;
+    left: 14%;
+    width: 72%;
+    height: 68%;
+    padding: 15px;
+    overflow-y: auto;
+    z-index: 5;
+    background: rgba(15, 10, 8, 0.75);
+    border: 2px solid #3d2b1f;
+    border-radius: 6px;
+    box-shadow: inset 0 0 15px rgba(0, 0, 0, 0.9);
+}
+
+.cascada-texto::-webkit-scrollbar {
+    width: 6px;
+}
+.cascada-texto::-webkit-scrollbar-track {
+    background: rgba(10, 5, 3, 0.8);
+    border-radius: 4px;
+}
+.cascada-texto::-webkit-scrollbar-thumb {
+    background: #5a3d28;
+    border-radius: 4px;
+}
+.cascada-texto::-webkit-scrollbar-thumb:hover {
+    background: #d4af37;
+}
+
+.cascada-texto h2 {
+    font-family: 'MedievalSharp', cursive, serif;
+    color: #d4af37;
+    font-size: 24px;
+    text-align: center;
+    margin-bottom: 15px;
+    border-bottom: 1px solid #5a3d28;
+    padding-bottom: 8px;
+}
+
+.cascada-texto p {
+    font-family: 'Georgia', serif;
+    color: #d1c7b7;
+    font-size: 14px;
+    line-height: 1.6;
+    margin-bottom: 15px;
+    text-align: justify;
+}
+
+/* ==========================================
+   ESTILOS DE LA PANTALLA EXPERIMENTOS (BARAJA)
+========================================== */
+.baraja-contenedor {
+    position: absolute;
+    top: 18%;
+    left: 14%;
+    width: 72%;
+    height: 68%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 5;
+}
+
+.mazo-cartas {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    background: rgba(15, 10, 8, 0.85);
+    border: 2px solid #3d2b1f;
+    border-radius: 6px;
+    box-shadow: inset 0 0 15px rgba(0, 0, 0, 0.9);
+    overflow: hidden;
+}
+
+.carta-experimento {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+    text-align: center;
+    opacity: 0;
+    pointer-events: none;
+    transform: scale(0.95);
+    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.carta-experimento.activa {
+    opacity: 1;
+    pointer-events: auto;
+    transform: scale(1);
+}
+
+.carta-experimento h3 {
+    font-family: 'MedievalSharp', cursive, serif;
+    color: #d4af37;
+    font-size: 24px;
+    margin-bottom: 15px;
+}
+
+.carta-experimento p {
+    font-family: 'Georgia', serif;
+    color: #d1c7b7;
+    font-size: 14px;
+    line-height: 1.5;
+}
+
+.btn-baraja {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    background: rgba(26, 17, 10, 0.9);
+    color: #d4af37;
+    border: 2px solid #5a3d28;
+    width: 35px;
+    height: 45px;
+    font-size: 18px;
+    cursor: pointer;
+    z-index: 10;
+    border-radius: 4px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.8);
+}
+
+.btn-baraja:hover {
+    background: #5a3d28;
+    color: #fff;
+    border-color: #d4af37;
+    transform: translateY(-50%) scale(1.1);
+}
+
+.btn-izquierda {
+    left: -18px;
+}
+
+.btn-derecha {
+    right: -18px;
+}
+
+/* ==========================================
+   ESTILOS DE LA PANTALLA REPOSITORIO DE IMÁGENES (CASCADA)
+========================================== */
+.cascada-imagenes {
+    position: absolute;
+    top: 18%;
+    left: 14%;
+    width: 72%;
+    height: 68%;
+    padding: 15px;
+    overflow-y: auto;
+    z-index: 5;
+    background: rgba(15, 10, 8, 0.85);
+    border: 2px solid #3d2b1f;
+    border-radius: 6px;
+    box-shadow: inset 0 0 15px rgba(0, 0, 0, 0.9);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 15px;
+}
+
+.cascada-imagenes::-webkit-scrollbar {
+    width: 6px;
+}
+.cascada-imagenes::-webkit-scrollbar-track {
+    background: rgba(10, 5, 3, 0.8);
+    border-radius: 4px;
+}
+.cascada-imagenes::-webkit-scrollbar-thumb {
+    background: #5a3d28;
+    border-radius: 4px;
+}
+.cascada-imagenes::-webkit-scrollbar-thumb:hover {
+    background: #d4af37;
+}
+
+.cascada-imagenes h2 {
+    font-family: 'MedievalSharp', cursive, serif;
+    color: #d4af37;
+    font-size: 22px;
+    text-align: center;
+    margin-bottom: 5px;
+    border-bottom: 1px solid #5a3d28;
+    padding-bottom: 6px;
+    width: 100%;
+}
+
+.caja-imagen {
+    width: 100%;
+    background: rgba(30, 20, 14, 0.9);
+    border: 2px solid #5a3d28;
+    border-radius: 6px;
+    padding: 10px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.6);
+}
+
+.caja-imagen:hover {
+    border-color: #d4af37;
+    transform: scale(1.02);
+    box-shadow: 0 0 15px rgba(212, 175, 55, 0.4);
+}
+
+.caja-imagen img {
+    width: 100%;
+    max-height: 220px;
+    object-fit: cover;
+    border-radius: 4px;
+    display: block;
+}
+
+.etiqueta-imagen {
+    font-family: 'MedievalSharp', cursive, serif;
+    color: #d1c7b7;
+    font-size: 14px;
+    margin-top: 8px;
+    letter-spacing: 1px;
+}
+
+.placeholder-imagen {
+    height: 100px;
+    justify-content: center;
+    border: 2px dashed #5a3d28;
+    background: rgba(20, 12, 8, 0.6);
+}
+
+.placeholder-imagen .etiqueta-imagen {
+    color: #776555;
+    font-style: italic;
+}
+
+/* ==========================================
+   ESTILOS PARA EL EJERCICIO AISLADO (`ejercicio.html`)
+========================================== */
+.servicios {
+    width: 100%;
+    display: grid;
+    grid-template-columns: 1fr 1.5fr;
+    gap: 60px;
+    padding: 50px;
+    background-color: #ffffff;
+}
+
+.introduccion {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+}
+
+.introduccion h1 {
+    font-size: 30px;
+    line-height: 1.05;
+    font-weight: 700;
+    margin-bottom: 18px;
+    color: #111827;
+}
+
+.linea-naranja {
+    width: 25px;
+    height: 3px;
+    background-color: #f59e0b;
+    margin-bottom: 18px;
+}
+
+.introduccion p {
+    max-width: 330px;
+    font-size: 12px;
+    line-height: 1.5;
+    color: #333333;
+    margin-bottom: 18px;
+}
+
+.boton {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    padding: 8px 11px;
+    background-color: #f59e0b;
+    color: #111827;
+    text-decoration: none;
+    font-size: 11px;
+    font-weight: bold;
+    border-radius: 2px;
+    transition: background-color 0.2s ease, transform 0.2s ease;
+}
+
+.boton:hover {
+    background-color: #d97706;
+    transform: translateY(-1px);
+}
+
+.tarjetas {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 12px;
+}
+
+.tarjeta {
+    min-height: 82px;
+    padding: 18px 20px;
+    background-color: #f3f3f3;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.tarjeta-categoria {
+    display: block;
+    margin-bottom: 7px;
+    font-size: 10px;
+    font-weight: bold;
+    color: #172a4d;
+}
+
+.tarjeta h2 {
+    font-size: 15px;
+    line-height: 1.15;
+    font-weight: 700;
+    color: #111827;
+}
+
+.talleres-seccion {
+    width: 100%;
+    padding: 40px 50px;
+    background-color: #f5f5f5;
+}
+
+.taller {
+    width: 100%;
+    display: grid;
+    grid-template-columns: 1fr 1.25fr;
+    min-height: 300px;
+}
+
+.taller-contenido {
+    background-color: #172a4d;
+    color: #ffffff;
+    padding: 28px 25px;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+}
+
+.taller-categoria {
+    width: 100%;
+    padding-bottom: 10px;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.12);
+    font-size: 10px;
+    font-weight: bold;
+    color: #ffffff;
+}
+
+.taller h2 {
+    margin-top: 22px;
+    margin-bottom: 14px;
+    font-size: 23px;
+    line-height: 1.1;
+    font-weight: 700;
+    color: #ffffff;
+}
+
+.linea-azul {
+    width: 25px;
+    height: 3px;
+    background-color: #8495b3;
+    margin-bottom: 18px;
+}
+
+.taller p {
+    max-width: 350px;
+    margin-bottom: auto;
+    font-size: 10px;
+    line-height: 1.5;
+    color: #eeeeee;
+}
+
+.taller .imagen {
+    width: 100%;
+    min-height: 300px;
+}
+
+.taller .imagen img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+}
